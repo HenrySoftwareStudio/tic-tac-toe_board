@@ -2,11 +2,13 @@ package main.engine;
 
 import java.awt.GridLayout;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Engine
 {
+	public static JFrame thisInstanceFrame;
 	public static int side;
 	private JPanel Panel;
 	private JLabel LT;

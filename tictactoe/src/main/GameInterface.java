@@ -1,7 +1,6 @@
 package main;
 
 import java.awt.Color;
-
 import javax.swing.JLabel;
 
 
@@ -32,5 +31,4 @@ public abstract class GameInterface
 	public abstract Color getColorFromSide();
 	public abstract int[][] getRedMap(int[][] publicMap);
 	public abstract int[][] getBlueMap(int[][] publicMap);
-
 }
