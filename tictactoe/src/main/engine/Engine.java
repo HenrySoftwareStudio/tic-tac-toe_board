@@ -10,16 +10,16 @@ public class Engine
 {
 	public static JFrame thisInstanceFrame;
 	public static int side;
-	private JPanel Panel;
-	private JLabel LT;
-	private JLabel CT;
-	private JLabel RT;
-	private JLabel LC;
-	private JLabel CC;
-	private JLabel RC;
-	private JLabel LB;
-	private JLabel CB;
-	private JLabel RB;
+	public JPanel Panel;
+	public JLabel LT;
+	public JLabel CT;
+	public JLabel RT;
+	public JLabel LC;
+	public JLabel CC;
+	public JLabel RC;
+	public JLabel LB;
+	public JLabel CB;
+	public JLabel RB;
 	
 	public Engine(final JLabel[] ToBeUsed)
 	{
