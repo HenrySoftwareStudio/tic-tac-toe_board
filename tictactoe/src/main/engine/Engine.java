@@ -23,7 +23,6 @@ public class Engine
 	
 	public Engine(final JLabel[] ToBeUsed)
 	{
-		side=1;
 		Panel=new JPanel(new GridLayout(3,3,4,4));
 		if(ToBeUsed.length!=9)
 		{

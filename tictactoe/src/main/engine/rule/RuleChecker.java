@@ -14,11 +14,6 @@ public class RuleChecker extends AbstractRuleChecker
                 OneDGeneral[i*3+j] = General[i][j];
             }
         }
-        for(int i:OneDGeneral)
-        {
-        	System.out.println(i);
-        }
-        System.out.println("------------------------------");
         //diagonal left
         if((OneDGeneral[0]!=0 & OneDGeneral[4]!=0 & OneDGeneral[8]!=0)&&
         		(OneDGeneral[0]==OneDGeneral[4]) & (OneDGeneral[8]==OneDGeneral[4]))

@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 import main.engine.Engine;
+import main.engine.resources.Labels;
 import main.game.GameCore;
 import main.game.style.Style;
 
@@ -33,6 +34,7 @@ public class Sequences
 		@Override
 		public void run()
 		{
+			VARABLE_INITIALIZER_SEQUENCE.run();
 			JPanel jPanel=new JPanel(new GridLayout(1,2));
 			ButtonGroup buttonGroup=new ButtonGroup();
 			JPanel subJPanel=new JPanel(new GridLayout(2, 1));
@@ -56,10 +58,39 @@ public class Sequences
 			});
 			buttonGroup.add(buttonAI);
 			buttonGroup.add(buttonP);
+			buttonAI.setSelected(true);
 			subJPanel.add(buttonAI);
 			subJPanel.add(buttonP);
 			jPanel.add(subJPanel);
 			JOptionPane.showInternalMessageDialog(null, jPanel, "Select mode", JOptionPane.QUESTION_MESSAGE);
+			JPanel jPanel2=new JPanel(new GridLayout(1,2));
+			ButtonGroup buttonGroup2=new ButtonGroup();
+			JPanel subJPanel2=new JPanel(new GridLayout(2, 1));
+			JRadioButton buttonRed=new JRadioButton("Start round as red");
+			buttonAI.addActionListener(new ActionListener()
+			{
+				@Override
+				public void actionPerformed(ActionEvent e)
+				{
+					Engine.side=Labels.RED_ID;			
+				}
+			});
+			JRadioButton buttonBlue=new JRadioButton("Start round as blue");
+			buttonBlue.addActionListener(new ActionListener()
+			{
+				@Override
+				public void actionPerformed(ActionEvent e)
+				{
+					Engine.side=Labels.BLUE_ID;					
+				}
+			});
+			buttonGroup2.add(buttonRed);
+			buttonGroup2.add(buttonBlue);
+			buttonRed.setSelected(true);
+			subJPanel2.add(buttonRed);
+			subJPanel2.add(buttonBlue);
+			jPanel2.add(subJPanel2);
+			JOptionPane.showInternalMessageDialog(null, jPanel2, "Select mode", JOptionPane.QUESTION_MESSAGE);
 			LAUNCH_SEQUENCE.run();
 		}
 	};
@@ -107,6 +138,15 @@ public class Sequences
 			OldD=Engine.thisInstanceFrame.getSize();
 			Engine.thisInstanceFrame.dispose();
 			PRELAUCH_SEQUENCE.run();
+		}
+	};
+	
+	public static final Runnable VARABLE_INITIALIZER_SEQUENCE=new Runnable()
+	{
+		public void run()
+		{
+			Engine.side=Labels.RED_ID;
+			AIenabled=true;
 		}
 	};
 }
