@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 import main.engine.Engine;
+import main.engine.ai.AI;
 import main.engine.resources.Labels;
 import main.game.GameCore;
 import main.game.style.Style;
@@ -91,6 +92,7 @@ public class Sequences
 			subJPanel2.add(buttonBlue);
 			jPanel2.add(subJPanel2);
 			JOptionPane.showInternalMessageDialog(null, jPanel2, "Select mode", JOptionPane.QUESTION_MESSAGE);
+			FINAL_CHECK_SEQUENCE.run();
 			LAUNCH_SEQUENCE.run();
 		}
 	};
@@ -136,6 +138,7 @@ public class Sequences
 		public void run()
 		{
 			OldD=Engine.thisInstanceFrame.getSize();
+			GameCore.ENDED=false;
 			Engine.thisInstanceFrame.dispose();
 			PRELAUCH_SEQUENCE.run();
 		}
@@ -147,6 +150,19 @@ public class Sequences
 		{
 			Engine.side=Labels.RED_ID;
 			AIenabled=true;
+		}
+	};
+	
+	public static final Runnable FINAL_CHECK_SEQUENCE=new Runnable()
+	{
+		
+		@Override
+		public void run()
+		{
+			if (AIenabled)
+			{
+				AI.AI_TERM=-1*Engine.side;
+			}			
 		}
 	};
 }

@@ -1,21 +1,15 @@
 package main.engine.ai;
 
-import static java.awt.event.KeyEvent.VK_1;
-import static java.awt.event.KeyEvent.VK_2;
-import static java.awt.event.KeyEvent.VK_3;
-import static java.awt.event.KeyEvent.VK_4;
-import static java.awt.event.KeyEvent.VK_5;
-import static java.awt.event.KeyEvent.VK_6;
-import static java.awt.event.KeyEvent.VK_7;
-import static java.awt.event.KeyEvent.VK_8;
-import static java.awt.event.KeyEvent.VK_9;
-import static java.awt.event.KeyEvent.VK_AT;
+import static java.awt.event.KeyEvent.*;
+
 
 import java.awt.AWTException;
 import java.awt.Robot;
 
 public class AI
 {
+	public static int AI_TERM;
+	
 	public static void runAI(final int[][] General, final int[][] RED, final int[][] BLUE) throws AWTException
 	{
 		Robot r=new Robot();

@@ -20,19 +20,43 @@ import main.game.launcher.Sequences;
 
 public class GameCore extends GameInterface
 {
-	public static int round=0;
 	public static boolean ENDED=false;
-	public static final GameCore GC=new GameCore();
-	public static final int AI_TERM=-1;
-	public static JPanel panel;
 	public static Engine engine;
+	public static final GameCore GC=new GameCore();
+	public static JPanel panel;
+	public static int round=0;
 	public RuleChecker RULE_CHECKER=new RuleChecker();
 	@Override
-	public JLabel buildLT()
+	public JLabel buildCB()
 	{
 		JLabel jLabel=new JLabel(Labels.NEUTRAL);
 		jLabel.setOpaque(false);
-		jLabel.setName("LT");
+		jLabel.setName("CB");
+		jLabel.setBorder(new LineBorder(Color.BLACK));
+		jLabel.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+				if(e.getSource()==jLabel & jLabel.getText() == Labels.NEUTRAL)
+				{
+					jLabel.setOpaque(true);
+					jLabel.setBackground(getColorFromSide());
+					jLabel.setText(yieldLabel());
+					jLabel.setForeground(Color.WHITE);
+					commonOnMouseClick();
+				}
+			}
+		});
+		return jLabel;
+	}
+
+	@Override
+	public JLabel buildCC()
+	{
+		JLabel jLabel=new JLabel(Labels.NEUTRAL);
+		jLabel.setOpaque(false);
+		jLabel.setName("CC");
 		jLabel.setBorder(new LineBorder(Color.BLACK));
 		jLabel.addMouseListener(new MouseAdapter()
 		{
@@ -78,11 +102,11 @@ public class GameCore extends GameInterface
 	}
 
 	@Override
-	public JLabel buildRT()
+	public JLabel buildLB()
 	{
 		JLabel jLabel=new JLabel(Labels.NEUTRAL);
 		jLabel.setOpaque(false);
-		jLabel.setName("RT");
+		jLabel.setName("LB");
 		jLabel.setBorder(new LineBorder(Color.BLACK));
 		jLabel.addMouseListener(new MouseAdapter()
 		{
@@ -93,8 +117,8 @@ public class GameCore extends GameInterface
 				{
 					jLabel.setOpaque(true);
 					jLabel.setBackground(getColorFromSide());
-					jLabel.setForeground(Color.WHITE);
 					jLabel.setText(yieldLabel());
+					jLabel.setForeground(Color.WHITE);
 					commonOnMouseClick();
 				}
 			}
@@ -128,86 +152,11 @@ public class GameCore extends GameInterface
 	}
 
 	@Override
-	public JLabel buildCC()
+	public JLabel buildLT()
 	{
 		JLabel jLabel=new JLabel(Labels.NEUTRAL);
 		jLabel.setOpaque(false);
-		jLabel.setName("CC");
-		jLabel.setBorder(new LineBorder(Color.BLACK));
-		jLabel.addMouseListener(new MouseAdapter()
-		{
-			@Override
-			public void mouseClicked(MouseEvent e)
-			{
-				if(e.getSource()==jLabel & jLabel.getText() == Labels.NEUTRAL)
-				{
-					jLabel.setOpaque(true);
-					jLabel.setBackground(getColorFromSide());
-					jLabel.setText(yieldLabel());
-					jLabel.setForeground(Color.WHITE);
-					commonOnMouseClick();
-				}
-			}
-		});
-		return jLabel;
-	}
-
-	@Override
-	public JLabel buildRC()
-	{
-		JLabel jLabel=new JLabel(Labels.NEUTRAL);
-		jLabel.setOpaque(false);
-		jLabel.setName("RC");
-		jLabel.setBorder(new LineBorder(Color.BLACK));
-		jLabel.addMouseListener(new MouseAdapter()
-		{
-			@Override
-			public void mouseClicked(MouseEvent e)
-			{
-				if(e.getSource()==jLabel & jLabel.getText() == Labels.NEUTRAL)
-				{
-					jLabel.setOpaque(true);
-					jLabel.setBackground(getColorFromSide());
-					jLabel.setText(yieldLabel());
-					jLabel.setForeground(Color.WHITE);
-					commonOnMouseClick();
-				}
-			}
-		});
-		return jLabel;
-	}
-
-	@Override
-	public JLabel buildLB()
-	{
-		JLabel jLabel=new JLabel(Labels.NEUTRAL);
-		jLabel.setOpaque(false);
-		jLabel.setName("LB");
-		jLabel.setBorder(new LineBorder(Color.BLACK));
-		jLabel.addMouseListener(new MouseAdapter()
-		{
-			@Override
-			public void mouseClicked(MouseEvent e)
-			{
-				if(e.getSource()==jLabel & jLabel.getText() == Labels.NEUTRAL)
-				{
-					jLabel.setOpaque(true);
-					jLabel.setBackground(getColorFromSide());
-					jLabel.setText(yieldLabel());
-					jLabel.setForeground(Color.WHITE);
-					commonOnMouseClick();
-				}
-			}
-		});
-		return jLabel;
-	}
-
-	@Override
-	public JLabel buildCB()
-	{
-		JLabel jLabel=new JLabel(Labels.NEUTRAL);
-		jLabel.setOpaque(false);
-		jLabel.setName("CB");
+		jLabel.setName("LT");
 		jLabel.setBorder(new LineBorder(Color.BLACK));
 		jLabel.addMouseListener(new MouseAdapter()
 		{
@@ -253,6 +202,56 @@ public class GameCore extends GameInterface
 	}
 
 	@Override
+	public JLabel buildRC()
+	{
+		JLabel jLabel=new JLabel(Labels.NEUTRAL);
+		jLabel.setOpaque(false);
+		jLabel.setName("RC");
+		jLabel.setBorder(new LineBorder(Color.BLACK));
+		jLabel.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+				if(e.getSource()==jLabel & jLabel.getText() == Labels.NEUTRAL)
+				{
+					jLabel.setOpaque(true);
+					jLabel.setBackground(getColorFromSide());
+					jLabel.setText(yieldLabel());
+					jLabel.setForeground(Color.WHITE);
+					commonOnMouseClick();
+				}
+			}
+		});
+		return jLabel;
+	}
+
+	@Override
+	public JLabel buildRT()
+	{
+		JLabel jLabel=new JLabel(Labels.NEUTRAL);
+		jLabel.setOpaque(false);
+		jLabel.setName("RT");
+		jLabel.setBorder(new LineBorder(Color.BLACK));
+		jLabel.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+				if(e.getSource()==jLabel & jLabel.getText() == Labels.NEUTRAL)
+				{
+					jLabel.setOpaque(true);
+					jLabel.setBackground(getColorFromSide());
+					jLabel.setForeground(Color.WHITE);
+					jLabel.setText(yieldLabel());
+					commonOnMouseClick();
+				}
+			}
+		});
+		return jLabel;
+	}
+
+	@Override
 	public void commonOnMouseClick()
 	{
 		round++;
@@ -272,7 +271,7 @@ public class GameCore extends GameInterface
 		int[][] blueMap=getBlueMap(sharedMap);
 		int[][] redMap=getRedMap(sharedMap);
 
-		if((AI_TERM==Engine.side | round==1)&Sequences.AIenabled)
+		if((AI.AI_TERM==Engine.side | round==1)&Sequences.AIenabled)
 		{
 			try
 			{
@@ -309,57 +308,33 @@ public class GameCore extends GameInterface
 			break;
 		}
 		}
+		if(ENDED)
+		{
+			engine.CB.removeMouseListener(engine.CB.getMouseListeners()[0]);
+			engine.CC.removeMouseListener(engine.CC.getMouseListeners()[0]);
+			engine.CT.removeMouseListener(engine.CT.getMouseListeners()[0]);
+			engine.LB.removeMouseListener(engine.LB.getMouseListeners()[0]);
+			engine.LC.removeMouseListener(engine.LC.getMouseListeners()[0]);
+			engine.LT.removeMouseListener(engine.LT.getMouseListeners()[0]);
+			engine.RB.removeMouseListener(engine.RB.getMouseListeners()[0]);
+			engine.RC.removeMouseListener(engine.RC.getMouseListeners()[0]);
+			engine.RT.removeMouseListener(engine.RT.getMouseListeners()[0]);
+		}
 		panel.repaint();
 	}
 
 	@Override
-	public String yieldLabel()
+	public int[][] getBlueMap(final int[][] publicMap)
 	{
-		return switch (Engine.side)
+		int[][] outputMap=new int[3][3];
+		for (int i = 0; i < publicMap.length; i++)
 		{
-		case Labels.BLUE_ID:
-		{
-			yield Labels.BLUE;
-		}
-		case Labels.RED_ID:
-		{
-			yield Labels.RED;
-		}
-		default:
-			//this should never happen
-			throw new IllegalArgumentException("Unexpected value: " + Engine.side);
-		};
-	}
-
-	@Override
-	public int[][] getMap(final JLabel[][] Org)
-	{
-		int[][] map=new int[3][3];
-		for(int i=0; i<Org.length; i++)
-		{
-			for (int j = 0; j < Org[i].length; j++)
+			for (int j = 0; j < publicMap[i].length; j++)
 			{
-				map[i][j]=stringNameToIntValue(Org[i][j].getText());
+				outputMap[i][j]=(publicMap[i][j]==Labels.BLUE_ID)? 1:0;				
 			}
 		}
-		return map;
-	}
-
-	@Override
-	public int stringNameToIntValue(final String Name)
-	{
-		if(Name.equals(Labels.RED))
-		{
-			return Labels.RED_ID;
-		}
-		else if (Name.equals(Labels.BLUE)) 
-		{
-			return Labels.BLUE_ID;
-		}
-		else
-		{
-			return Labels.NEUTRAL_ID;
-		}
+		return outputMap;
 	}
 
 	@Override
@@ -382,6 +357,20 @@ public class GameCore extends GameInterface
 	}
 
 	@Override
+	public int[][] getMap(final JLabel[][] Org)
+	{
+		int[][] map=new int[3][3];
+		for(int i=0; i<Org.length; i++)
+		{
+			for (int j = 0; j < Org[i].length; j++)
+			{
+				map[i][j]=stringNameToIntValue(Org[i][j].getText());
+			}
+		}
+		return map;
+	}
+
+	@Override
 	public int[][] getRedMap(final int[][] publicMap)
 	{
 		int[][] outputMap=new int[3][3];
@@ -396,16 +385,38 @@ public class GameCore extends GameInterface
 	}
 
 	@Override
-	public int[][] getBlueMap(final int[][] publicMap)
+	public int stringNameToIntValue(final String Name)
 	{
-		int[][] outputMap=new int[3][3];
-		for (int i = 0; i < publicMap.length; i++)
+		if(Name.equals(Labels.RED))
 		{
-			for (int j = 0; j < publicMap[i].length; j++)
-			{
-				outputMap[i][j]=(publicMap[i][j]==Labels.BLUE_ID)? 1:0;				
-			}
+			return Labels.RED_ID;
 		}
-		return outputMap;
+		else if (Name.equals(Labels.BLUE)) 
+		{
+			return Labels.BLUE_ID;
+		}
+		else
+		{
+			return Labels.NEUTRAL_ID;
+		}
+	}
+
+	@Override
+	public String yieldLabel()
+	{
+		return switch (Engine.side)
+		{
+		case Labels.BLUE_ID:
+		{
+			yield Labels.BLUE;
+		}
+		case Labels.RED_ID:
+		{
+			yield Labels.RED;
+		}
+		default:
+			//this should never happen
+			throw new IllegalArgumentException("Unexpected value: " + Engine.side);
+		};
 	}
 }

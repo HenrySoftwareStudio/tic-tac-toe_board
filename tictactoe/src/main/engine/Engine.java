@@ -8,18 +8,21 @@ import javax.swing.JPanel;
 
 public class Engine
 {
-	public static JFrame thisInstanceFrame;
+	//static
 	public static int side;
-	public JPanel Panel;
-	public JLabel LT;
-	public JLabel CT;
-	public JLabel RT;
-	public JLabel LC;
-	public JLabel CC;
-	public JLabel RC;
-	public JLabel LB;
+	public static JFrame thisInstanceFrame;
+	//instance
 	public JLabel CB;
+	public JLabel CC;
+	public JLabel CT;
+	public JLabel LB;
+	public JLabel LC;
+	public JLabel LT;
 	public JLabel RB;
+	public JLabel RC;
+	public JLabel RT;
+	
+	public JPanel Panel;
 	
 	public Engine(final JLabel[] ToBeUsed)
 	{
@@ -82,6 +85,11 @@ public class Engine
 		build();
 	}
 	
+	public JPanel getProduct()
+	{
+		return Panel;
+	}
+	
 	private void build()
 	{
 		Panel.add(LT);
@@ -93,11 +101,6 @@ public class Engine
 		Panel.add(LB);
 		Panel.add(CB);
 		Panel.add(RB);
-	}
-	
-	public JPanel getProduct()
-	{
-		return Panel;
 	}
 	
 
