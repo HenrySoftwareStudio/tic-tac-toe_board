@@ -12,15 +12,8 @@ public class Engine
 	public static int side;
 	public static JFrame thisInstanceFrame;
 	//instance
-	public JLabel CB;
-	public JLabel CC;
-	public JLabel CT;
-	public JLabel LB;
-	public JLabel LC;
-	public JLabel LT;
-	public JLabel RB;
-	public JLabel RC;
-	public JLabel RT;
+	public JLabel CB,CC,CT,LB,LC,LT,RB,RC,RT;
+
 	
 	public JPanel Panel;
 	
@@ -102,6 +95,5 @@ public class Engine
 		Panel.add(CB);
 		Panel.add(RB);
 	}
-	
 
 }
