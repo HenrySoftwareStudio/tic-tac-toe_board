@@ -1,7 +1,7 @@
 tic-tac-toe_board
 
 a note about keyboard shortcuts:
-
+FYI, AI opponents use robot stimulated keypresses to function.
 board:
 -------
 |7|8|9|
