@@ -21,4 +21,5 @@ Blue:pathToFile\fileName;
 Neutral:pathToFile\fileName;
 dDimension:500,500;
 IdvDimension:158,143;
+border:0;
 "these are good starting values, and do not use keyword words if you are writing something else here"
