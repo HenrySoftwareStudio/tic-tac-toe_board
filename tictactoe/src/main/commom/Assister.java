@@ -14,6 +14,8 @@ import java.util.Scanner;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+import main.engine.resources.Labels;
+import main.game.GameCore;
 import main.game.launcher.setting.ColorSelection;
 
 public class Assister
@@ -218,5 +220,67 @@ public class Assister
 			d.width=image.getWidth(null);
 		}
 		return image.getScaledInstance(d.width, d.height, Image.SCALE_DEFAULT);
+	}
+	
+	public static void ErrorReport(final Thread t, final Throwable e)
+	{
+		JOptionPane.showInternalMessageDialog(null,t.toString()+
+				", had an exception,this may be fatal,\ndetails:\n"+Assister.getExceptionWholeMessage(e),"ERROR",JOptionPane.ERROR_MESSAGE);
+		if(FatalExceptionList.isFatalException(e))
+		{
+			System.exit(e.hashCode());
+		}
+	}
+	
+	public static ImageIcon AutoIconOnBuild(final int PosX, final int PosY)
+	{
+		Image img;
+		switch (GameCore.map[PosX+PosY*3])
+		{
+		case Labels.BLUE_ID:
+		{
+			img=Labels.BlueIcon;
+			break;
+		}
+		case Labels.NEUTRAL_ID:
+		{
+			img=Labels.NeutralIcon;
+			break;
+		}
+		case Labels.RED_ID:
+		{
+			img=Labels.RedIcon;
+			break;
+		}
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + GameCore.map[PosX+PosY*3]);
+		}
+		return iconMaker(img, GameCore.InitDimension);
+	}
+	
+	public static String AutoStringOnBuild(final int PosX, final int PosY)
+	{
+		String name;
+		switch (GameCore.map[PosX+PosY*3])
+		{
+		case Labels.BLUE_ID:
+		{
+			name=Labels.BLUE;
+			break;
+		}
+		case Labels.NEUTRAL_ID:
+		{
+			name=Labels.NEUTRAL;
+			break;
+		}
+		case Labels.RED_ID:
+		{
+			name=Labels.RED;
+			break;
+		}
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + GameCore.map[PosX+PosY*3]);
+		}
+		return name;
 	}
 }

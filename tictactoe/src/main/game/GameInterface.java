@@ -29,7 +29,7 @@ public abstract class GameInterface
 	public abstract JLabel buildRC();
 	public abstract JLabel buildRT();
 	//action methods
-	public abstract void commonOnMouseClick();
+	public abstract void commonOnMouseClick(final int X, final int Y);
 	public abstract int[][] getMap(JLabel[][] Org);
 	public abstract int stringNameToIntValue(String Name);
 	public abstract String yieldLabel();

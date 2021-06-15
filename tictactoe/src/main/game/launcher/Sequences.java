@@ -31,7 +31,6 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 import main.commom.Assister;
-import main.commom.exceptions.IllegalCallerException;
 import main.engine.Engine;
 import main.engine.ai.AI;
 import main.engine.resources.Labels;
@@ -41,10 +40,12 @@ import main.game.style.Style;
 
 public class Sequences
 {
+	public static boolean metaExist=true;
+	public static boolean borderEnabled=true;
 	public static Dimension OldD;
 	private static final int INIT_ID=Labels.RED_ID;
 	public static boolean AIenabled;
-	public static final Runnable PRELAUCH_SEQUENCE=new Runnable()
+	public static final Runnable PRELAUNCH_SEQUENCE=new Runnable()
 	{
 		
 		@Override
@@ -52,10 +53,7 @@ public class Sequences
 		{
 			VARABLE_INITIALIZER_SEQUENCE.run();
 			GET_META_INFO.run();
-			//enemy type
 			ASK_ENEMY.run();
-			
-			//starting color
 			ASK_COLOR.run();
 			FINAL_CHECK_SEQUENCE.run();
 			LAUNCH_SEQUENCE.run();
@@ -67,92 +65,124 @@ public class Sequences
 		@Override
 		public void run()
 		{
-			StackTraceElement[] stackTraceElements = new Exception().getStackTrace();
-			if(stackTraceElements[1].getClassName()!="main.game.launcher.Sequences$1")
-			{
-				throw new IllegalCallerException();
-			}
 			JFrame frame=new JFrame("tic-tac-toe");
 			JMenuBar jMenuBar=new JMenuBar();
-			JMenu jMenu=new JMenu("Game");
-			JMenuItem jMenuItem=new JMenuItem("Restart (F5)");
+			JMenu jMenuGame=new JMenu("Game");
 			JMenu jMenuSetting=new JMenu("setting");
+			JMenuItem jMenuItemRestart=new JMenuItem("Relaunch (F5)");
+			JMenuItem jMenuItemRelaunch=new JMenuItem("Reset Game (F6)");
 			JMenuItem jMenuItemSetRed=new JMenuItem("set red icon");
 			JMenuItem jMenuItemSetBlue=new JMenuItem("set blue icon");
 			JMenuItem jMenuItemSetNeu=new JMenuItem("set neutral icon");
-			jMenuItem.addActionListener(new ActionListener()
+			JMenuItem jMenuItemSetBorder=new JMenuItem("toggle icon Border Current:"+((borderEnabled)?"On":"Off"));
+			jMenuItemRestart.setToolTipText("Clean Restart the Program (F5)");
+			jMenuItemRestart.addActionListener(new ActionListener()
 			{
 				
 				@Override
 				public void actionPerformed(ActionEvent e)
 				{
-					RESTART_SEQUENCE.run();			
+					RESTART_SEQUENCE.run();					
 				}
 			});
+			jMenuItemRelaunch.setToolTipText("Reset Game State, only effective if the game have not yet ended (F6)");
+			jMenuItemRelaunch.addActionListener(new ActionListener()
+			{
+				
+				@Override
+				public void actionPerformed(ActionEvent e)
+				{
+					RELAUNCH_SEQUENCE.run();			
+				}
+			});
+			jMenuItemSetRed.setToolTipText("Set Icon Used For Red Side");
 			jMenuItemSetRed.addActionListener(new ActionListener()
 			{
 				
 				@Override
 				public void actionPerformed(ActionEvent e)
 				{
-					final FileDialog dialog=new FileDialog(frame, "select Red file");
-					dialog.setFile("*.gif");
-					dialog.setVisible(true);
-					dialog.setMultipleMode(false);
-					try
+					if(metaExist)
 					{
-						Assister.writeFileToMeta(dialog.getDirectory()+dialog.getFile(), ColorSelection.RED);
-					}
-					catch (IOException e1)
-					{
+						final FileDialog dialog=new FileDialog(frame, "select Red file");
+						dialog.setFile("*.gif");
+						dialog.setVisible(true);
+						dialog.setMultipleMode(false);
+						try
+						{
+							Assister.writeFileToMeta(dialog.getDirectory()+dialog.getFile(), ColorSelection.RED);
+						}
+						catch (IOException e1)
+						{
+						}
 					}
 				}
 			});
+			jMenuItemSetBlue.setToolTipText("Set Icon Used For Blue Side");
 			jMenuItemSetBlue.addActionListener(new ActionListener()
 			{
 				
 				@Override
 				public void actionPerformed(ActionEvent e)
 				{
-					final FileDialog dialog=new FileDialog(frame, "select Blue file");
-					dialog.setFile("*.gif");
-					dialog.setVisible(true);
-					dialog.setMultipleMode(false);
-					try
+					if(metaExist)
 					{
-						Assister.writeFileToMeta(dialog.getDirectory()+dialog.getFile(), ColorSelection.BLUE);
+						final FileDialog dialog=new FileDialog(frame, "select Blue file");
+						dialog.setFile("*.gif");
+						dialog.setVisible(true);
+						dialog.setMultipleMode(false);
+						try
+						{
+							Assister.writeFileToMeta(dialog.getDirectory()+dialog.getFile(), ColorSelection.BLUE);
+						}
+						catch (IOException e1)
+						{
+						}
 					}
-					catch (IOException e1)
-					{
-					}
-					
 				}
 			});
+			jMenuItemSetNeu.setToolTipText("Set Icon Used For Unoccupied Squares");
 			jMenuItemSetNeu.addActionListener(new ActionListener()
 			{
 				
 				@Override
 				public void actionPerformed(ActionEvent e)
 				{
-					final FileDialog dialog=new FileDialog(frame, "select Neutral file");
-					dialog.setFile("*.gif");
-					dialog.setVisible(true);
-					dialog.setMultipleMode(false);
-					try
+					if(metaExist)
 					{
-						Assister.writeFileToMeta(dialog.getDirectory()+dialog.getFile(), ColorSelection.NEUTRAL);
+						final FileDialog dialog=new FileDialog(frame, "select Neutral file");
+						dialog.setFile("*.gif");
+						dialog.setVisible(true);
+						dialog.setMultipleMode(false);
+						try
+						{
+							Assister.writeFileToMeta(dialog.getDirectory()+dialog.getFile(), ColorSelection.NEUTRAL);
+						}
+						catch (IOException e1)
+						{
+						}
 					}
-					catch (IOException e1)
-					{
-					}
-					
 				}
 			});
-			jMenu.add(jMenuItem);
+			jMenuItemSetBorder.setToolTipText("Enable/Disable Border");
+			jMenuItemSetBorder.addActionListener(new ActionListener()
+			{
+				
+				@Override
+				public void actionPerformed(ActionEvent e)
+				{
+					borderEnabled=!borderEnabled;
+					Engine.thisInstanceFrame.dispose();
+					LAUNCH_SEQUENCE.run();
+				}
+			});
+			jMenuGame.add(jMenuItemRelaunch);
+			jMenuGame.add(jMenuItemRestart);
 			jMenuSetting.add(jMenuItemSetRed);
 			jMenuSetting.add(jMenuItemSetBlue);
 			jMenuSetting.add(jMenuItemSetNeu);
-			jMenuBar.add(jMenu);
+			jMenuSetting.add(jMenuItemSetBorder);
+			jMenuBar.add(jMenuGame);
 			jMenuBar.add(jMenuSetting);
 			frame.setJMenuBar(jMenuBar);
 			frame.setMinimumSize(new Dimension(100, 100));
@@ -202,64 +232,78 @@ public class Sequences
 				{
 					try
 					{
-						Dimension currentSize=Engine.thisInstanceFrame.getSize();
-						Scanner metaDataFile=new Scanner("");
-						try
+						if(metaExist)
 						{
-							metaDataFile = new Scanner(new File("Meta.metadata"));
-						}
-						catch (FileNotFoundException e0)
-						{
-							e0.printStackTrace();
-						}
-						String metaText[]=new String[5];
-						try
-						{
+							Dimension currentSize=Engine.thisInstanceFrame.getSize();
+							Scanner metaDataFile=new Scanner("");
+							metaDataFile.useDelimiter("\n");
+							try
+							{
+								metaDataFile = new Scanner(new File("Meta.metadata"));
+							}
+							catch (FileNotFoundException e0)
+							{
+								e0.printStackTrace();
+							}
+							String metaText[]=new String[6];
+							try
+							{
+								for (int i = 0; i < metaText.length; i++)
+								{
+									metaText[i]=(metaDataFile.hasNextLine())? metaDataFile.nextLine():"";
+								}
+							}
+							catch (Exception e1)
+							{
+								e1.printStackTrace();
+							}
 							for (int i = 0; i < metaText.length; i++)
 							{
-								metaText[i]=(metaDataFile.hasNextLine())? metaDataFile.nextLine():"";
+								if(metaText[i].contains("dDimension") & !metaText[i].contains("IdvDimension"))
+								{
+									metaText[i]="dDimension:"+currentSize.width+","+currentSize.height+";";
+								}
 							}
-						}
-						catch (Exception e1)
-						{
-							e1.printStackTrace();
-						}
-						for (int i = 0; i < metaText.length; i++)
-						{
-							if(metaText[i].contains("dDimension") & !metaText[i].contains("IdvDimension"))
-							{
-								metaText[i]="dDimension:"+currentSize.width+","+currentSize.height+";";
-							}
-						}
-						for (int i = 0; i < metaText.length; i++)
-						{
-							if(metaText[i].contains("IdvDimension"))
-							{
-								metaText[i]="IdvDimension:"+engine.LT.getWidth()+","+engine.LT.getHeight()+";";
-							}
-						}
-						metaDataFile.close();
-						FileWriter wtritTo=null;
-						try
-						{
-							wtritTo=new FileWriter(new File("Meta.metadata"));
-							String finalMessage="";
 							for (int i = 0; i < metaText.length; i++)
 							{
-								finalMessage+=metaText[i]+"\n";
+								if(metaText[i].contains("IdvDimension"))
+								{
+									metaText[i]="IdvDimension:"+engine.LT.getWidth()+","+engine.LT.getHeight()+";";
+								}
 							}
-							wtritTo.write(finalMessage);
-							wtritTo.flush();
-						}
-						catch (IOException e2)
-						{
-							e2.printStackTrace();
+							for (int i = 0; i < metaText.length; i++)
+							{
+								if(metaText[i].contains("border"))
+								{
+									metaText[i]="border:"+((borderEnabled)?1:0)+";";
+								}
+							}
+							metaDataFile.close();
+							FileWriter writeTo=null;
+							try
+							{
+								writeTo=new FileWriter(new File("Meta.metadata"));
+								String finalMessage="";
+								for (int i = 0; i < metaText.length; i++)
+								{
+									finalMessage+=metaText[i]+"\n";
+								}
+								writeTo.write(finalMessage);
+								writeTo.flush();
+							}
+							catch (IOException e2)
+							{
+								Assister.ErrorReport(Thread.currentThread(), e2);
+							}
+							finally 
+							{
+								writeTo.close();
+							}
 						}
 					}
 					catch (Exception e0) 
 					{
-						System.err.println(this.getClass().getEnclosingMethod().toGenericString());
-						e0.printStackTrace();
+						Assister.ErrorReport(Thread.currentThread(), e0);
 					}
 					
 				}
@@ -284,7 +328,7 @@ public class Sequences
 			OldD=Engine.thisInstanceFrame.getSize();
 			GameCore.ENDED=false;
 			Engine.thisInstanceFrame.dispose();
-			PRELAUCH_SEQUENCE.run();
+			PRELAUNCH_SEQUENCE.run();
 		}
 	};
 	
@@ -393,7 +437,6 @@ public class Sequences
 		@Override
 		public void run()
 		{
-			boolean metaExist=true;
 			Scanner metaDataFile=new Scanner("");
 			try
 			{
@@ -483,8 +526,11 @@ public class Sequences
 				
 				final String LabelDimensionX=LabelDimensionPre.substring(0, LabelDimensionPre.indexOf(","));
 				final String LabelDimensionY=LabelDimensionPre.substring(LabelDimensionPre.indexOf(",")+1);
-				System.out.println(LabelDimensionPre);
 				GameCore.InitDimension=new Dimension(Integer.parseInt(LabelDimensionX), Integer.parseInt(LabelDimensionY));
+				
+				final int BorderEnable=metaText.indexOf("border:")+7;
+				final int BorderEnableEnd=metaText.indexOf(";", BorderEnable);
+				borderEnabled=(Integer.parseInt(metaText.substring(BorderEnable, BorderEnableEnd))==0)?false:true;
 			}
 			else
 			{
@@ -493,6 +539,19 @@ public class Sequences
 				Labels.NeutralIcon=null;
 				OldD=new Dimension(200, 200);
 			}
+		}
+	};
+	
+	public static final Runnable RELAUNCH_SEQUENCE=new Runnable()
+	{
+		
+		@Override
+		public void run()
+		{
+			OldD=Engine.thisInstanceFrame.getSize();
+			GameCore.ENDED=false;
+			Engine.thisInstanceFrame.dispose();
+			LAUNCH_SEQUENCE.run();
 		}
 	};
 }

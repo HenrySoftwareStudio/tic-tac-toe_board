@@ -5,6 +5,7 @@ import static main.game.GameCore.engine;
 import static main.game.GameCore.panel;
 import static main.game.GameCore.ENDED;
 import static main.game.launcher.Sequences.RESTART_SEQUENCE;
+import static main.game.launcher.Sequences.RELAUNCH_SEQUENCE;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -36,7 +37,7 @@ public class Style
 					{
 						jLabel.setName(GC.yieldLabel());
 						jLabel.setIcon(GC.yieldIcon(jLabel.getSize()));
-						GC.commonOnMouseClick();
+						GC.commonOnMouseClick(0,2);
 					}
 				}
 			});
@@ -51,7 +52,7 @@ public class Style
 					{
 						jLabel.setName(GC.yieldLabel());
 						jLabel.setIcon(GC.yieldIcon(jLabel.getSize()));
-						GC.commonOnMouseClick();
+						GC.commonOnMouseClick(1,2);
 					}
 				}
 			});
@@ -66,7 +67,7 @@ public class Style
 					{
 						jLabel.setName(GC.yieldLabel());
 						jLabel.setIcon(GC.yieldIcon(jLabel.getSize()));
-						GC.commonOnMouseClick();
+						GC.commonOnMouseClick(2,2);
 					}
 				}
 			});
@@ -81,7 +82,7 @@ public class Style
 					{
 						jLabel.setName(GC.yieldLabel());
 						jLabel.setIcon(GC.yieldIcon(jLabel.getSize()));
-						GC.commonOnMouseClick();
+						GC.commonOnMouseClick(0,1);
 					}	
 				}
 			});
@@ -96,7 +97,7 @@ public class Style
 					{
 						jLabel.setName(GC.yieldLabel());
 						jLabel.setIcon(GC.yieldIcon(jLabel.getSize()));
-						GC.commonOnMouseClick();
+						GC.commonOnMouseClick(1,1);
 					}		
 				}
 			});
@@ -111,7 +112,7 @@ public class Style
 					{
 						jLabel.setName(GC.yieldLabel());
 						jLabel.setIcon(GC.yieldIcon(jLabel.getSize()));
-						GC.commonOnMouseClick();
+						GC.commonOnMouseClick(1,2);
 					}			
 				}
 			});
@@ -126,7 +127,7 @@ public class Style
 					{
 						jLabel.setName(GC.yieldLabel());
 						jLabel.setIcon(GC.yieldIcon(jLabel.getSize()));
-						GC.commonOnMouseClick();
+						GC.commonOnMouseClick(0,0);
 					}
 				}
 			});
@@ -141,7 +142,7 @@ public class Style
 					{
 						jLabel.setName(GC.yieldLabel());
 						jLabel.setIcon(GC.yieldIcon(jLabel.getSize()));
-						GC.commonOnMouseClick();
+						GC.commonOnMouseClick(0,1);
 					}	
 				}
 			});
@@ -156,7 +157,7 @@ public class Style
 					{
 						jLabel.setName(GC.yieldLabel());
 						jLabel.setIcon(GC.yieldIcon(jLabel.getSize()));
-						GC.commonOnMouseClick();
+						GC.commonOnMouseClick(0,2);
 					}	
 				}
 			});
@@ -168,6 +169,16 @@ public class Style
 				public void actionPerformed(ActionEvent e)
 				{
 					RESTART_SEQUENCE.run();
+				}
+			});
+			panel.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_F6,0), "F6");
+			panel.getActionMap().put("F6", new AbstractAction()
+			{
+				
+				@Override
+				public void actionPerformed(ActionEvent e)
+				{
+					RELAUNCH_SEQUENCE.run();					
 				}
 			});
 		}

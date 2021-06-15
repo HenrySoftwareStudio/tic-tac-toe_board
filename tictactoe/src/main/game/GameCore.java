@@ -1,5 +1,6 @@
 package main.game;
 
+import static main.game.launcher.Sequences.borderEnabled;
 
 import java.awt.AWTException;
 import java.awt.Color;
@@ -29,6 +30,9 @@ import main.game.launcher.Sequences;
 
 public class GameCore extends GameInterface
 {
+	public static int[] map= {Labels.NEUTRAL_ID,Labels.NEUTRAL_ID,Labels.NEUTRAL_ID,
+			Labels.NEUTRAL_ID,Labels.NEUTRAL_ID,Labels.NEUTRAL_ID,Labels.NEUTRAL_ID
+			,Labels.NEUTRAL_ID,Labels.NEUTRAL_ID};
 	public static Dimension InitDimension;
 	public static boolean ENDED=false;
 	public static Engine engine;
@@ -43,9 +47,12 @@ public class GameCore extends GameInterface
 		jLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 		jLabel.setAlignmentY(JLabel.CENTER_ALIGNMENT);
 		jLabel.setOpaque(true);
-		jLabel.setName(Labels.NEUTRAL);
-		jLabel.setIcon(Assister.iconMaker(Labels.NeutralIcon,InitDimension));
-		jLabel.setBorder(new LineBorder(Color.BLACK));
+		jLabel.setName(Assister.AutoStringOnBuild(1,0));
+		jLabel.setIcon(Assister.AutoIconOnBuild(1,0));
+		if(borderEnabled)
+		{
+			jLabel.setBorder(new LineBorder(Color.BLACK));
+		}
 		jLabel.addMouseListener(new MouseAdapter()
 		{
 			@Override
@@ -55,7 +62,7 @@ public class GameCore extends GameInterface
 				{
 					jLabel.setName(yieldLabel());
 					jLabel.setIcon(yieldIcon(jLabel.getSize()));
-					commonOnMouseClick();
+					commonOnMouseClick(1,0);
 				}
 			}
 		});
@@ -104,9 +111,12 @@ public class GameCore extends GameInterface
 	{
 		JLabel jLabel=new JLabel();
 		jLabel.setOpaque(true);
-		jLabel.setName(Labels.NEUTRAL);
-		jLabel.setIcon(Assister.iconMaker(Labels.NeutralIcon,InitDimension));
-		jLabel.setBorder(new LineBorder(Color.BLACK));
+		jLabel.setName(Assister.AutoStringOnBuild(1,1));
+		jLabel.setIcon(Assister.AutoIconOnBuild(1,1));
+		if(borderEnabled)
+		{
+			jLabel.setBorder(new LineBorder(Color.BLACK));
+		}
 		jLabel.addMouseListener(new MouseAdapter()
 		{
 			@Override
@@ -116,7 +126,7 @@ public class GameCore extends GameInterface
 				{
 					jLabel.setName(yieldLabel());
 					jLabel.setIcon(yieldIcon(jLabel.getSize()));
-					commonOnMouseClick();
+					commonOnMouseClick(1,1);
 				}
 			}
 		});
@@ -165,9 +175,12 @@ public class GameCore extends GameInterface
 	{
 		JLabel jLabel=new JLabel();
 		jLabel.setOpaque(true);
-		jLabel.setName(Labels.NEUTRAL);
-		jLabel.setIcon(Assister.iconMaker(Labels.NeutralIcon,InitDimension));
-		jLabel.setBorder(new LineBorder(Color.BLACK));
+		jLabel.setName(Assister.AutoStringOnBuild(1,2));
+		jLabel.setIcon(Assister.AutoIconOnBuild(1,2));
+		if(borderEnabled)
+		{
+			jLabel.setBorder(new LineBorder(Color.BLACK));
+		}
 		jLabel.addMouseListener(new MouseAdapter()
 		{
 			@Override
@@ -177,7 +190,7 @@ public class GameCore extends GameInterface
 				{
 					jLabel.setName(yieldLabel());
 					jLabel.setIcon(yieldIcon(jLabel.getSize()));
-					commonOnMouseClick();
+					commonOnMouseClick(1,2);
 				}
 			}
 		});
@@ -226,9 +239,12 @@ public class GameCore extends GameInterface
 	{
 		JLabel jLabel=new JLabel();
 		jLabel.setOpaque(true);
-		jLabel.setName(Labels.NEUTRAL);
-		jLabel.setIcon(Assister.iconMaker(Labels.NeutralIcon,InitDimension));
-		jLabel.setBorder(new LineBorder(Color.BLACK));
+		jLabel.setName(Assister.AutoStringOnBuild(0,0));
+		jLabel.setIcon(Assister.AutoIconOnBuild(0,0));
+		if(borderEnabled)
+		{
+			jLabel.setBorder(new LineBorder(Color.BLACK));
+		}
 		jLabel.addMouseListener(new MouseAdapter()
 		{
 			@Override
@@ -238,7 +254,7 @@ public class GameCore extends GameInterface
 				{
 					jLabel.setName(yieldLabel());
 					jLabel.setIcon(yieldIcon(jLabel.getSize()));
-					commonOnMouseClick();
+					commonOnMouseClick(0,0);
 				}
 			}
 		});
@@ -287,9 +303,12 @@ public class GameCore extends GameInterface
 	{
 		JLabel jLabel=new JLabel();
 		jLabel.setOpaque(true);
-		jLabel.setName(Labels.NEUTRAL);
-		jLabel.setIcon(Assister.iconMaker(Labels.NeutralIcon,InitDimension));
-		jLabel.setBorder(new LineBorder(Color.BLACK));
+		jLabel.setName(Assister.AutoStringOnBuild(0,1));
+		jLabel.setIcon(Assister.AutoIconOnBuild(0,1));
+		if(borderEnabled)
+		{
+			jLabel.setBorder(new LineBorder(Color.BLACK));
+		}
 		jLabel.addMouseListener(new MouseAdapter()
 		{
 			@Override
@@ -299,7 +318,7 @@ public class GameCore extends GameInterface
 				{
 					jLabel.setName(yieldLabel());
 					jLabel.setIcon(yieldIcon(jLabel.getSize()));
-					commonOnMouseClick();
+					commonOnMouseClick(0,1);
 				}
 			}
 		});
@@ -348,9 +367,12 @@ public class GameCore extends GameInterface
 	{
 		JLabel jLabel=new JLabel();
 		jLabel.setOpaque(true);
-		jLabel.setName(Labels.NEUTRAL);
-		jLabel.setIcon(Assister.iconMaker(Labels.NeutralIcon,InitDimension));
-		jLabel.setBorder(new LineBorder(Color.BLACK));
+		jLabel.setName(Assister.AutoStringOnBuild(0,2));
+		jLabel.setIcon(Assister.AutoIconOnBuild(0,2));
+		if(borderEnabled)
+		{
+			jLabel.setBorder(new LineBorder(Color.BLACK));
+		}
 		jLabel.addMouseListener(new MouseAdapter()
 		{
 			@Override
@@ -360,7 +382,7 @@ public class GameCore extends GameInterface
 				{
 					jLabel.setName(yieldLabel());
 					jLabel.setIcon(yieldIcon(jLabel.getSize()));
-					commonOnMouseClick();
+					commonOnMouseClick(0,2);
 				}
 			}
 		});
@@ -409,9 +431,12 @@ public class GameCore extends GameInterface
 	{
 		JLabel jLabel=new JLabel();
 		jLabel.setOpaque(true);
-		jLabel.setName(Labels.NEUTRAL);
-		jLabel.setIcon(Assister.iconMaker(Labels.NeutralIcon,InitDimension));
-		jLabel.setBorder(new LineBorder(Color.BLACK));
+		jLabel.setName(Assister.AutoStringOnBuild(2,0));
+		jLabel.setIcon(Assister.AutoIconOnBuild(2,0));
+		if(borderEnabled)
+		{
+			jLabel.setBorder(new LineBorder(Color.BLACK));
+		}
 		jLabel.addMouseListener(new MouseAdapter()
 		{
 			@Override
@@ -421,7 +446,7 @@ public class GameCore extends GameInterface
 				{
 					jLabel.setName(yieldLabel());
 					jLabel.setIcon(yieldIcon(jLabel.getSize()));
-					commonOnMouseClick();
+					commonOnMouseClick(2,0);
 				}
 			}
 		});
@@ -470,9 +495,12 @@ public class GameCore extends GameInterface
 	{
 		JLabel jLabel=new JLabel();
 		jLabel.setOpaque(true);
-		jLabel.setName(Labels.NEUTRAL);
-		jLabel.setIcon(Assister.iconMaker(Labels.NeutralIcon,InitDimension));
-		jLabel.setBorder(new LineBorder(Color.BLACK));
+		jLabel.setName(Assister.AutoStringOnBuild(2,1));
+		jLabel.setIcon(Assister.AutoIconOnBuild(2,1));
+		if(borderEnabled)
+		{
+			jLabel.setBorder(new LineBorder(Color.BLACK));
+		}
 		jLabel.addMouseListener(new MouseAdapter()
 		{
 			@Override
@@ -482,7 +510,7 @@ public class GameCore extends GameInterface
 				{
 					jLabel.setName(yieldLabel());
 					jLabel.setIcon(yieldIcon(jLabel.getSize()));
-					commonOnMouseClick();
+					commonOnMouseClick(2,1);
 				}
 			}
 		});
@@ -531,9 +559,12 @@ public class GameCore extends GameInterface
 	{
 		JLabel jLabel=new JLabel();
 		jLabel.setOpaque(true);
-		jLabel.setName(Labels.NEUTRAL);
-		jLabel.setIcon(Assister.iconMaker(Labels.NeutralIcon,InitDimension));
-		jLabel.setBorder(new LineBorder(Color.BLACK));
+		jLabel.setName(Assister.AutoStringOnBuild(2,2));
+		jLabel.setIcon(Assister.AutoIconOnBuild(2,2));
+		if(borderEnabled)
+		{
+			jLabel.setBorder(new LineBorder(Color.BLACK));
+		}
 		jLabel.addMouseListener(new MouseAdapter()
 		{
 			@Override
@@ -543,7 +574,7 @@ public class GameCore extends GameInterface
 				{
 					jLabel.setName(yieldLabel());
 					jLabel.setIcon(yieldIcon(jLabel.getSize()));
-					commonOnMouseClick();
+					commonOnMouseClick(2,2);
 				}
 			}
 		});
@@ -588,7 +619,7 @@ public class GameCore extends GameInterface
 	}
 
 	@Override
-	public void commonOnMouseClick()
+	public void commonOnMouseClick(final int X, final int Y)
 	{
 		round++;
 		Engine.side *= -1;
@@ -630,6 +661,7 @@ public class GameCore extends GameInterface
 				}
 			}			
 		}
+		updateMap(X, Y, -Engine.side);
 		final int winner=RULE_CHECKER.chkWinner(sharedMap);
 		switch (winner)
 		{
@@ -650,7 +682,7 @@ public class GameCore extends GameInterface
 			if(text.lastIndexOf(Labels.NEUTRAL)==-1 & !ENDED)
 			{
 				ENDED=true;
-				JOptionPane.showMessageDialog(null, "Tile","Round Finished",JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(Engine.thisInstanceFrame, "Tile","Round Finished",JOptionPane.INFORMATION_MESSAGE);
 			}
 			break;
 		}
@@ -745,5 +777,10 @@ public class GameCore extends GameInterface
 			//this should never happen
 			throw new IllegalArgumentException("Unexpected value: " + Engine.side);
 		};
+	}
+	
+	private static void updateMap(final int posX, final int posY, final int ColorID)
+	{
+		map[posY*3+posX]=ColorID;
 	}
 }
